@@ -10,7 +10,8 @@ def solution(jobs:list) :
     while jobs :
         
         # 시간 업데이트. 현재 시간에 작업 없으면 쭉 땡김.
-        curTime = max(curTime, jobs[-1][0])
+        if curTime < jobs[-1][0] :
+            curTime = jobs[-1][0]
             
         ## 현재 시간 기준 처리할수 있는 작업 체크
         ## 작업들 중 제일 짧은 작업 찾기
