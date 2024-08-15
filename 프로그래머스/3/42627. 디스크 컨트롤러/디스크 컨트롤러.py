@@ -9,10 +9,6 @@ def solution(jobs:list) :
 
     while jobs :
         
-        ## 작업 다 끝났으면 종료
-        if len(jobs) == 0 :
-            break
-        
         # 시간 업데이트. 현재 시간에 작업 없으면 쭉 땡김.
         if curTime < jobs[-1][0] :
             curTime = jobs[-1][0]
