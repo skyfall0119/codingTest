@@ -1,6 +1,5 @@
 def split_uv(w):
     left, right = 0, 0
-    u, v = "", ""
     for i, ch in enumerate(w):
         if ch == "(":
             left += 1
