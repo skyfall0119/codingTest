@@ -1,16 +1,19 @@
 import sys
 sys.setrecursionlimit(10**6)
 
+def find_y_max(nodeList):
+    maxYind = 0
+    for i in range(len(nodeList)) :
+        if nodeList[i][1] > nodeList[maxYind][1] :
+            maxYind = i
+    return maxYind
 
 
 def preorder(nodeList) :
     if len(nodeList) == 0 :
         return []
 
-    maxYind = 0
-    for i in range(len(nodeList)) :
-        if nodeList[i][1] > nodeList[maxYind][1] :
-            maxYind = i
+    maxYind = find_y_max(nodeList)
         
     left = preorder(nodeList[:maxYind])
     right = preorder(nodeList[maxYind+1:]) 
@@ -23,10 +26,7 @@ def postorder(nodeList) :
     if len(nodeList) == 0 :
         return []
 
-    maxYind = 0
-    for i in range(len(nodeList)) :
-        if nodeList[i][1] > nodeList[maxYind][1] :
-            maxYind = i
+    maxYind = maxYind = find_y_max(nodeList)
         
     left = postorder(nodeList[:maxYind])
     right = postorder(nodeList[maxYind+1:]) 
@@ -38,7 +38,7 @@ def postorder(nodeList) :
 
 def solution(nodeinfo):
     
-    ## sort by x. find y max
+    ## x 로 정렬. 노드번호 추가.
     for i in range(len(nodeinfo)) :
 
         ## z = 노드번호
@@ -51,9 +51,7 @@ def solution(nodeinfo):
             else :
                 break
 
-
     pre =  preorder(nodeinfo)
     post =  postorder(nodeinfo)
-    
     
     return [pre, post]
