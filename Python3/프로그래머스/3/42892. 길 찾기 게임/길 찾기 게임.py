@@ -37,8 +37,6 @@ def postorder(nodeList) :
 
 
 def solution(nodeinfo):
-    answer = []
-    maxY = [0,0,0]
     
     ## sort by x. find y max
     for i in range(len(nodeinfo)) :
@@ -56,7 +54,6 @@ def solution(nodeinfo):
 
     pre =  preorder(nodeinfo)
     post =  postorder(nodeinfo)
-    answer.append(pre)
-    answer.append(post)
     
-    return answer
+    
+    return [pre, post]
