@@ -28,18 +28,23 @@ def solution(expression):
     
     ## calculate result from each combo
     for comb in permutations(["*", "+", "-"]):
+        ## stack        
         calc_list = exp_list.copy()
+        calc_list.reverse() # 앞에서부터 O(1) pop. 
+        tmp_stack = []
+        
         for opr in comb:
-            while True:
-                try:
-                    ind = calc_list.index(opr)
-                    res = handle_opr(calc_list[ind-1], calc_list[ind+1], opr)
-                    calc_list[ind-1] = res
-                    calc_list.pop(ind)
-                    calc_list.pop(ind)
-                except: # no operator anymore
-                    break
-                    
+            while calc_list:
+                item = calc_list.pop() 
+                if item == opr:
+                    res = handle_opr(tmp_stack.pop(), calc_list.pop(), item)
+                    tmp_stack.append(res)
+                else:
+                    tmp_stack.append(item)
+            calc_list = tmp_stack
+            calc_list.reverse()
+            tmp_stack = []
+        
         answer = max(answer, abs(calc_list[0]))
     
     return answer
