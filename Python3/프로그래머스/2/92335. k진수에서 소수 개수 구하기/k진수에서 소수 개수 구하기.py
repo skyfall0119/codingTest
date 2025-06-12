@@ -1,3 +1,4 @@
+from concurrent.futures import ProcessPoolExecutor, as_completed
 def to_k_base(n,k):
     res = ""
     while n > 0:
@@ -5,8 +6,7 @@ def to_k_base(n,k):
         res += str(r)
     return res[::-1]
 
-def is_divisible(i, num):
-    return num % i == 0
+
 
 def is_prime(num):
     
@@ -16,17 +16,16 @@ def is_prime(num):
     for i in range(2, int(num**0.5)+1):
         if num % i == 0:
             return False
-        
+    
     return True
 
 def solution(n, k):
-    answer = 0
+    
     converted = to_k_base(n,k)
+    splited = [int(num) for num in converted.split("0") if num]
     
-    for num in converted.split("0"):
-        if not num:
-            continue
-        if is_prime(int(num)):
-            answer += 1
+    with ProcessPoolExecutor(max_workers=10) as executor:
+        results = executor.map(is_prime, splited)
     
-    return answer
+
+    return sum(results)
