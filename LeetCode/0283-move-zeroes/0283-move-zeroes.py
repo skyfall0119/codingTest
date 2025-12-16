@@ -4,20 +4,13 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        l, r = 0, 1
+        fillleft = 0
 
-        while l <= r and r < len(nums):
-            print(f"l {l} | r {r}")
-            if nums[l] == 0 and nums[r] != 0:
-                nums[l], nums[r] = nums[r], nums[l]
-                l+=1
-                r+=1
-            elif nums[l] == 0 and nums[r] == 0:
-                r += 1
-            elif nums[l] != 0 and nums[r] != 0:
-                l+=1
-                r+=1
-            elif nums[l] != 0 and nums[r] == 0:
-                l += 1
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[fillleft] = nums[i]
+                fillleft += 1
         
+        for i in range(fillleft, len(nums)):
+            nums[i] = 0
         
