@@ -4,7 +4,6 @@ class Solution:
         temp = [] # going left asters.
 
         while asteroids:
-            print(asteroids, ans, temp)
             one = asteroids.pop()
             if one > 0: # check temp for rightside
                 if not temp: # farmost right. will never collide
