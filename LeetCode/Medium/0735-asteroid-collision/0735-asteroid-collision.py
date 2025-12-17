@@ -4,7 +4,7 @@ class Solution:
         stack = []
         for ast in asteroids:
             if ast < 0:
-                if not stack: # farleft. discard
+                if not stack:
                     stack.append(ast)
                     continue
                 
