@@ -13,8 +13,9 @@ class Solution:
             return False
 
         # number counts don't match
-        if (sorted(w1.values()),) != (sorted(w2.values()),):
-            return False
+        for a,b in zip(sorted(w1.values()), sorted(w2.values())):
+            if a != b:
+                return False
 
         # freely move, swap.
         return True
