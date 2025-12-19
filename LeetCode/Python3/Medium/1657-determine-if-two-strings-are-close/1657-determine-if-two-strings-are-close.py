@@ -3,9 +3,6 @@ from collections import Counter
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
         w1, w2 = Counter(word1), Counter(word2)
-        print(w1)
-        print(w2)
-        print(sorted(w1.values()), sorted(w2.values()))
 
         # different length
         if sum(w1.values()) != sum(w2.values()):
