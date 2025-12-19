@@ -6,13 +6,9 @@ class Solution:
         rows, cols = defaultdict(int), defaultdict(int)
         for i in range(len(grid)):
             rows[tuple(grid[i])] += 1
-            col = []
-            for j in range(len(grid)):
-                col.append(grid[j][i])
+            
+            col = [grid[j][i] for j in range(len(grid))]
             cols[tuple(col)] += 1
-
-        print(rows)
-        print(cols)
 
         for k in rows.keys():
             if k in cols:
