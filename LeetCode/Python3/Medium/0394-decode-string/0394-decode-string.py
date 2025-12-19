@@ -1,40 +1,45 @@
 class Solution:
 
-    def decode(self, li:list):
-        if not li:
-            return []
+    def decode(self, s,e):
+        print("decode", self.li[s:e+1])
+        print(s,e)
+        if s > e:
+            print("out")
+            return ""
         
         ret = []
 
         left_stack = []
         state = "normal"
 
-        num_start = 0
-        repeat = 1
-        for i in range(len(li)):
+        repeat = 0
+        for i in range(s,e+1):
             if state == "normal":
-                if not li[i].isdigit():
-                    ret.append(li[i])
+                if not self.li[i].isdigit():
+                    ret.append(self.li[i])
                 else:
-                    num_start = i
+                    repeat = int(self.li[i])
                     state = "num"
                 
 
             elif state == "num":
-               if li[i] == "[":
-                  repeat = int("".join(li[num_start:i]))
-                  left_stack.append(i)
-                  state = "bracket"
+                if self.li[i] != "[":
+                   repeat = repeat*10 + int(self.li[i])
+                else:
+                   left_stack.append(i)
+                   state = 'bracket'
+                   
+
                     
 
             else : #bracket
-                if li[i] == "[":
+                if self.li[i] == "[":
                     left_stack.append(i)
-                elif li[i] == ']':
+                elif self.li[i] == ']':
                     start = left_stack.pop()
 
                     if not left_stack: # found a full complete bracket
-                        inside = self.decode(li[start+1:i]) 
+                        inside = self.decode(start+1,i-1) 
                         ret.append(inside * repeat)
                         state = "normal"
 
@@ -43,4 +48,5 @@ class Solution:
             
 
     def decodeString(self, s: str) -> str:
-        return self.decode(list(s))
+        self.li = list(s)
+        return self.decode(0, len(s)-1)
