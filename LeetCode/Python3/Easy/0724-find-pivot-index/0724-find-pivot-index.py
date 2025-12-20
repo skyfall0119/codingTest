@@ -1,19 +1,20 @@
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
         total = sum(nums)
-        cnt = 0
-        
+
+        left, right = 0, total
 
         for i in range(len(nums)):
             
-            if left_ind == 0:
-                left, right = 0, total
-            elif right_ind == 0:
-                left, right = total, 0
+            # edge
+            if i-1 < 0:
+                left, right = 0, total - nums[i]
+            elif i+1 == len(nums):
+                left, right = total - nums[i], 0
             else:
+                left += nums[i-1]
+                right -= nums[i]
+            if left == right:
+                return i
             
-            left += n
-            right -= n
-            if left == right
-
-        
+        return -1        
