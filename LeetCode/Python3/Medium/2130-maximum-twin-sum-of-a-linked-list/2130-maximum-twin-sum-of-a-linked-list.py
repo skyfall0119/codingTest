@@ -10,7 +10,7 @@ class Solution:
         if head is None:
             return 0
 
-        q = deque(head)
+        q = deque([head])
         while head.next:
             head = head.next
             q.append(head)
